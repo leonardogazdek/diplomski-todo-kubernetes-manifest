@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diplomski-todo-frontend
+spec:
+  selector:
+    matchLabels:
+      app: diplomski-todo-frontend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: diplomski-todo-frontend
+    spec:
+      containers:
+        - name: diplomski-frontend
+          image: leonardogazdek/diplomski:frontend-x86v7
+          envFrom:
+            - configMapRef:
+                name: frontend-env-6
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "150m"
+            limits:
+              memory: "768Mi"
+              cpu: "400m"
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: regcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: diplomski-todo-frontend-service
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 9001
+      targetPort: 3000
+  selector:
+    app: diplomski-todo-frontend

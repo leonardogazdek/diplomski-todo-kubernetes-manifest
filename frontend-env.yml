@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-env-6
+  namespace: default
+data:
+  NEXT_PUBLIC_BASE_URL: http://141.147.10.108.nip.io/todo-api

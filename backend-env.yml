@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-env
+  namespace: default
+data:
+  ACCESS_KEY: (FILL)
+  SECRET_ACCESS_KEY: (FILL)
+  REGION: eu-central-1
+  DYNAMODB_TODO_TABLE_NAME: todo-diplomski
